@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Grooming",
+    "description": "Professional grooming services to keep your pet looking and feeling their best.",
+    "icon": "fas fa-cut"
+  },
+  {
+    "id": 2,
+    "name": "Veterinary Care",
+    "description": "Comprehensive health checks and medical care from our certified veterinarians.",
+    "icon": "fas fa-stethoscope"
+  },
+  {
+    "id": 3,
+    "name": "Boarding",
+    "description": "Safe and comfortable boarding facilities for when you're away.",
+    "icon": "fas fa-home"
+  },
+  {
+    "id": 4,
+    "name": "Training",
+    "description": "Professional training programs to help your pet learn good behavior.",
+    "icon": "fas fa-graduation-cap"
+  }
+]

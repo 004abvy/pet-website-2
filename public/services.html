@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paws & Claws | Services</title>
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo"><i class="fas fa-paw"></i> Paws & <span>Claws</span></div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search services...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+            <div class="mobile-menu" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-services">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Explore our premium services to keep your pets healthy, happy, and well cared for.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+
+            </div>
+            <div class="services-grid" id="services-grid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Paws & Claws. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const servicesGrid = document.getElementById('services-grid');
+
+        async function loadServices() {
+            try {
+                const res = await fetch('/api/services');
+                if (!res.ok) throw new Error('Failed to fetch services');
+                const services = await res.json();
+
+                servicesGrid.innerHTML = ''; // Clear any previous content
+
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'service-card';
+                    card.innerHTML = `
+                        <div class="service-icon"><i class="${service.icon}"></i></div>
+                        <h3>${service.name}</h3>
+                        <p class="service-description">${service.description}</p>
+                        <p class="service-details">${service.details || ''}</p>
+                    `;
+                    servicesGrid.appendChild(card);
+                });
+            } catch (err) {
+                console.error(err);
+                servicesGrid.innerHTML = '<p style="color:red;">Failed to load services.</p>';
+            }
+        }
+
+        loadServices();
+
+      document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const nav = document.getElementById('main-nav');
+            const mobileIcon = mobileMenu.querySelector('i');
+
+            if (mobileMenu && nav) {
+                mobileMenu.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                    // Toggle hamburger <-> close icon
+                    mobileIcon.classList.toggle('fa-bars');
+                    mobileIcon.classList.toggle('fa-times');
+                });
+
+                // Close menu when a link is clicked
+                document.querySelectorAll('#main-nav a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('active');
+                        mobileIcon.classList.add('fa-bars');
+                        mobileIcon.classList.remove('fa-times');
+                    });
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

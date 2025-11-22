@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paws & Claws | Products</title>
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-container">
+            <div class="logo"><i class="fas fa-paw"></i> Paws & <span>Claws</span></div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+            <div class="mobile-menu" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <section class="hero-products">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>Explore our premium pet products.</p>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2><br></h2>
+
+            </div>
+            <div class="products-grid" id="products-grid"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Paws & Claws. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const grid = document.getElementById('products-grid');
+
+        async function loadProducts() {
+            try {
+                const res = await fetch('/api/products');
+                if (!res.ok) throw new Error('Failed to fetch products');
+                const products = await res.json();
+
+                function renderProducts() {
+                    grid.innerHTML = '';
+
+                    products.forEach(product => {
+                        const stars = '★'.repeat(Math.floor(product.rating)) +
+                            (product.rating % 1 ? '½' : '') +
+                            '☆'.repeat(5 - Math.ceil(product.rating));
+
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+
+                        // Show Add to Cart or Out of Stock based on quantity
+                        let buttonHTML = '';
+                        if (product.quantity > 0) {
+                            buttonHTML = `<button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>`;
+                        } else {
+                            buttonHTML = `<button class="btn out-of-stock" disabled>Out of Stock</button>`;
+                        }
+
+                        // Show remaining quantity if less than 11
+                        let quantityHTML = '';
+                        if (product.quantity > 0 && product.quantity < 10) {
+                            quantityHTML = `<p class="product-quantity"> ${product.quantity} in stock!</p>`;
+                        }
+
+                        card.innerHTML = `
+        <div class="product-img" style="background-image:url('${product.img}')"></div>
+        <div class="product-content">
+            <h3>${product.name}</h3>
+            <div class="product-rating">${stars}</div>
+            <p class="product-price">$${product.price.toFixed(2)}</p>
+            ${quantityHTML}
+            ${buttonHTML}
+        </div>
+    `;
+
+                        grid.appendChild(card);
+                    });
+
+
+                    // Add to Cart functionality
+                    document.querySelectorAll('.add-to-cart').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const id = parseInt(btn.dataset.id);
+                            const product = products.find(p => p.id === id);
+
+                            if (product.quantity <= 0) {
+                                alert("Sorry, this product is out of stock!");
+                                renderProducts(); // update button
+                                return;
+                            }
+
+                            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                            const existing = cart.find(i => i.id === id);
+                            if (existing) existing.qty += 1;
+                            else cart.push({ ...product, qty: 1 });
+
+                            product.quantity--; // decrease stock
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            alert(`${product.name} added to cart!`);
+                            renderProducts(); // update buttons dynamically
+                        });
+                    });
+                }
+
+                renderProducts();
+
+            } catch (err) {
+                console.error(err);
+                grid.innerHTML = '<p style="color:red;">Failed to load products.</p>';
+            }
+        }
+
+
+        loadProducts();
+
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function () {
+            document.getElementById('main-nav').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.getElementById('main-nav').classList.remove('active');
+            });
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

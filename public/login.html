@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Paws & Claws | Premium Pet Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff7e5f;
+            --accent: #6b8e23;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --text: #333;
+            --success: #28a745;
+            --error: #dc3545;
+            --warning: #ffc107;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        nav ul li a.active {
+            color: var(--secondary);
+        }
+
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions a {
+            margin-left: 20px;
+            color: var(--dark);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .header-actions a:hover {
+            color: var(--secondary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .login-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .login-hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .login-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Login Section */
+        .login-section {
+            padding: 80px 0;
+            background-color: white;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .login-info {
+            padding: 30px;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .login-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .login-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .benefits-list i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--secondary);
+            opacity: 0.2;
+            position: absolute;
+            top: -15px;
+            left: -5px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-right: 10px;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Login Form */
+        .login-form-container {
+            padding: 40px;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .login-form-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            position: relative;
+            text-align: center;
+        }
+
+        .login-form-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #ff6b4a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .register-link a:hover {
+            color: var(--secondary);
+        }
+
+        /* Success/Error Messages */
+        .error-message {
+            color: var(--error);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .alert-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(40, 167, 69, 0.2);
+        }
+
+        .alert-error {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .logout-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logout-container p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .login-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                transition: left 0.3s;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                padding: 30px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0 0 20px 0;
+            }
+
+            .login-hero {
+                padding: 150px 0 80px;
+            }
+
+            .login-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-hero h1 {
+                font-size: 2rem;
+            }
+
+            .login-form-container {
+                padding: 30px 20px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .forgot-password {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                Paws & <span>Claws</span>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" class="active">Login</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="login-hero">
+        <div class="container">
+            <h1>Welcome Back!</h1>
+            <p>Access your account to manage orders, appointments, and pet profiles</p>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container login-container">
+            <!-- Login Information -->
+            <div class="login-info">
+                <h2>Why Create an Account?</h2>
+                <ul class="benefits-list">
+                    <li>
+                        <i class="fas fa-shopping-bag"></i>
+                        <div>
+                            <strong>Track Orders</strong>
+                            <p>View your order history and track current orders</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <strong>Manage Appointments</strong>
+                            <p>Schedule and manage grooming and vet appointments</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-paw"></i>
+                        <div>
+                            <strong>Pet Profiles</strong>
+                            <p>Create profiles for each of your pets with special needs</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-tags"></i>
+                        <div>
+                            <strong>Exclusive Offers</strong>
+                            <p>Receive special discounts and early access to sales</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"I love how easy it is to reorder my dog's favorite food and track my grooming appointments.
+                            The pet profiles make it so convenient!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img"
+                            style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Loyal Customer Since 2020</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form Container (Dynamic Content) -->
+            <div class="login-form-container">
+                <div id="authContainer">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Paws & Claws</h3>
+                    <p>Your trusted partner in pet care for over a decade. We're dedicated to providing the best
+                        products and services for your furry family members.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Sabzazar LDA Housing Society</li>
+                        <li><i class="fas fa-phone"></i> +92 318 8164861</li>
+                        <li><i class="fas fa-envelope"></i> abvy7661@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Paws & Claws. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+<script>
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mainNav = document.getElementById('main-nav');
+
+    mobileMenu.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+    });
+
+    document.querySelectorAll('#main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+        });
+    });
+
+    // Render login form
+    function renderLoginForm() {
+        const authContainer = document.getElementById('authContainer');
+        authContainer.innerHTML = `
+            <h2>Login to Your Account</h2>
+            <div class="alert-message" id="alertMessage"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address *</label>
+                    <input type="email" id="loginEmail" required>
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <input type="password" id="loginPassword" required>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="far fa-eye"></i>
+                    </button>
+                    <div class="error-message" id="passwordError">Please enter your password</div>
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-block">Login</button>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="register.html">Register here</a></p>
+                </div>
+            </form>
+        `;
+        attachLoginHandlers();
+    }
+
+    // Render logout view with Order Tracker
+    function renderLogoutForm(user) {
+        const authContainer = document.getElementById('authContainer');
+        authContainer.innerHTML = `
+            <h2>Welcome, ${user.name || user.email || 'User'}!</h2>
+            <div class="logout-container">
+                <p>You are currently logged in to your account.</p>
+                <button id="logoutBtn" class="btn btn-block">Logout</button>
+                <div class="register-link">
+                    <p><a href="index.html">Go to Dashboard</a></p>
+                </div>
+            </div>
+
+            <!-- Order Tracker -->
+            <div class="order-tracker" style="margin-top:30px;">
+                <h3>Track Your Order</h3>
+                <input type="text" id="orderIdInput" placeholder="Enter Order ID" style="padding:10px; width:60%; margin-right:10px;">
+                <button id="trackOrderBtn" class="btn"><i class="fas fa-search"></i> Track Order</button>
+
+                <div id="orderDetails" style="display:none; margin-top:20px; padding:15px; background:#f8f9fa; border-radius:8px;">
+                    <p><strong>Order ID:</strong> <span id="displayOrderId"></span></p>
+                    <p><strong>Status:</strong> <span id="orderStatus"></span></p>
+                    <p><strong>Date:</strong> <span id="orderDate"></span></p>
+                    <p><strong>Customer:</strong> <span id="customerName"></span></p>
+                    <p><strong>Email:</strong> <span id="customerEmail"></span></p>
+                    <p><strong>Phone:</strong> <span id="customerPhone"></span></p>
+                    <p><strong>Location:</strong> <span id="customerLocation"></span></p>
+                    <h4>Items:</h4>
+                    <div id="orderItems"></div>
+                    <p><strong>Total Amount:</strong> $<span id="orderTotal"></span></p>
+                </div>
+                <p id="orderNotFound" style="color:red; display:none;">Order not found. Please check your Order ID.</p>
+            </div>
+        `;
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('user');
+            renderLoginForm();
+        });
+
+        // Order Tracker functionality
+       // Order Tracker functionality
+        const trackBtn = document.getElementById('trackOrderBtn');
+        trackBtn.addEventListener('click', async () => {
+            const orderId = document.getElementById('orderIdInput').value.trim();
+            if (!orderId) return alert('Please enter an Order ID.');
+
+            try {
+                // Fetch from backend API instead of trying to access the file directly
+                const res = await fetch(`http://localhost:5000/api/orders/${orderId}`);
+                const orderNotFound = document.getElementById('orderNotFound');
+                const orderDetails = document.getElementById('orderDetails');
+
+                if (!res.ok) {
+                    orderDetails.style.display = 'none';
+                    orderNotFound.style.display = 'block';
+                    return;
+                }
+
+                const order = await res.json();
+
+                // Make sure the order belongs to the logged-in user
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (order.email !== user.email) {
+                    orderDetails.style.display = 'none';
+                    orderNotFound.textContent = 'This order does not belong to you.';
+                    orderNotFound.style.display = 'block';
+                    return;
+                }
+
+                orderNotFound.style.display = 'none';
+                orderDetails.style.display = 'block';
+                document.getElementById('displayOrderId').textContent = order.orderId;
+                document.getElementById('orderStatus').textContent = order.status;
+                document.getElementById('orderDate').textContent = new Date(order.orderDate).toLocaleString();
+                document.getElementById('customerName').textContent = `${order.firstName} ${order.lastName}`;
+                document.getElementById('customerEmail').textContent = order.email;
+                document.getElementById('customerPhone').textContent = order.phone;
+                document.getElementById('customerLocation').textContent = order.location;
+                document.getElementById('orderTotal').textContent = order.totalAmount.toFixed(2);
+
+                const itemsDiv = document.getElementById('orderItems');
+                itemsDiv.innerHTML = '';
+                order.items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.style.display = 'flex';
+                    div.style.justifyContent = 'space-between';
+                    div.textContent = `${item.name} x ${item.qty} - $${(item.price * item.qty).toFixed(2)}`;
+                    itemsDiv.appendChild(div);
+                });
+            } catch (err) {
+                console.error(err);
+                alert('Failed to fetch order data.');
+            }
+        });
+
+    }
+
+    // Attach login handlers
+    function attachLoginHandlers() {
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('loginPassword');
+
+        passwordToggle.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            passwordToggle.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            document.querySelectorAll('.error-message').forEach(err => err.style.display = 'none');
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            let isValid = true;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+            if (!password) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+            if (!isValid) return;
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                const alertMessage = document.getElementById('alertMessage');
+
+                if (response.ok) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alertMessage.textContent = data.message;
+                    alertMessage.className = 'alert-message alert-success';
+                    alertMessage.style.display = 'block';
+
+                    setTimeout(() => renderLogoutForm(data.user), 1000);
+                } else {
+                    alertMessage.textContent = data.error || 'Login failed';
+                    alertMessage.className = 'alert-message alert-error';
+                    alertMessage.style.display = 'block';
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                const alertMessage = document.getElementById('alertMessage');
+                alertMessage.textContent = 'Server error. Please try again later.';
+                alertMessage.className = 'alert-message alert-error';
+                alertMessage.style.display = 'block';
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        document.querySelector('.forgot-password').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('In a real application, this would open a password reset form.');
+        });
+    }
+
+    // Check login state on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            renderLogoutForm(user);
+        } else {
+            renderLoginForm();
+        }
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Paws & Claws</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Order Success Modal Styles */
+        .order-success-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .order-success-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+
+        .success-header i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: checkmark 0.5s ease-in-out;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .success-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .order-id-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #4a6fa5;
+        }
+
+        .order-id-box p {
+            margin: 0 0 10px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .order-id {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a6fa5;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .modal-btn {
+            margin: 10px 5px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .modal-btn-primary {
+            background-color: #4a6fa5;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background-color: #3d5a87;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-btn-secondary {
+            background-color: #ff7e5f;
+            color: white;
+        }
+
+        .modal-btn-secondary:hover {
+            background-color: #ff6b4a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .copy-btn {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #3d5a87;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn.copied {
+            background: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-container">
+            <div class="logo"><i class="fas fa-paw"></i> Paws & <span>Claws</span></div>
+            <div class="header-actions">
+                <a id="continue-shopping" href="products.html" class="btn-header" style="display:none;">Continue
+                    Shopping</a>
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="index.html"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section class="cart-section">
+        <div class="container">
+            <h2>Your Cart</h2>
+
+            <div id="cart-items"></div>
+            <div id="cart-summary"></div>
+
+            <h2>Checkout Information</h2>
+
+            <form id="checkout-form" class="checkout-form">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input id="first-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input id="last-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Location / Address</label>
+                    <input id="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="email" type="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input id="phone" type="tel" required>
+                </div>
+                <div class="payment-method">
+                    <label>Payment Method</label>
+                    <div class="payment-option">
+                        <input type="checkbox" id="cod" checked>
+                        <label for="cod">Cash on Delivery</label>
+                    </div>
+                </div>
+
+                <button type="submit" id="place-order" class="btn">Place Order</button>
+            </form>
+
+            <a id="continue-shopping-bottom" href="products.html" class="btn"
+                style="display:none; margin-top:15px;">Continue Shopping</a>
+        </div>
+    </section>
+
+    <!-- Order Success Modal -->
+    <div id="orderSuccessModal" class="order-success-modal">
+        <div class="order-success-content">
+            <div class="success-header">
+                <i class="fas fa-check-circle"></i>
+                <h2>Order Placed Successfully!</h2>
+            </div>
+            <div class="success-body">
+                <p>Thank you for your order! Your order has been confirmed.</p>
+
+                <div class="order-id-box">
+                    <p>Your Order ID:</p>
+                    <div class="order-id" id="displayOrderId">-</div>
+                    <button class="copy-btn" id="copyOrderId">
+                        <i class="fas fa-copy"></i> Copy Order ID
+                    </button>
+                    <p style="margin-top: 10px; font-size: 0.85rem;">
+                        <i class="fas fa-info-circle"></i> Save this ID to track your order
+                    </p>
+                </div>
+
+                <p class="info-text">
+                    <i class="fas fa-truck"></i> Your order will be delivered within 7 days.<br>
+                    You can track your order status using the Order ID on the login page.
+                </p>
+
+                <div style="margin-top: 25px;">
+                    <a href="login.html" class="modal-btn modal-btn-primary">
+                        <i class="fas fa-shipping-fast"></i> Track Order
+                    </a>
+                    <a href="products.html" class="modal-btn modal-btn-secondary">
+                        <i class="fas fa-shopping-bag"></i> Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartSummaryDiv = document.getElementById('cart-summary');
+        const continueTop = document.getElementById('continue-shopping');
+        const continueBottom = document.getElementById('continue-shopping-bottom');
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function renderCart() {
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+                cartSummaryDiv.innerHTML = '';
+                document.getElementById('checkout-form').style.display = 'none';
+                continueTop.style.display = 'inline-block';
+                continueBottom.style.display = 'inline-block';
+                return;
+            }
+
+            continueTop.style.display = 'none';
+            continueBottom.style.display = 'none';
+            document.getElementById('checkout-form').style.display = 'block';
+
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                <span>${item.name} x ${item.qty} - $${(item.price * item.qty).toFixed(2)}</span>
+                <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+            `;
+                cartItemsDiv.appendChild(div);
+            });
+
+            cartSummaryDiv.innerHTML = `<h3>Total: $${total.toFixed(2)}</h3>`;
+
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.id; // keep as string
+
+                    cart = cart.filter(i => i.id !== id);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                });
+            });
+        }
+
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (cart.length === 0) return alert("Your cart is empty!");
+            const codCheckbox = document.getElementById('cod');
+            if (!codCheckbox.checked) {
+                return alert("Please select a payment method.");
+            }
+
+            const order = {
+                firstName: document.getElementById('first-name').value.trim(),
+                lastName: document.getElementById('last-name').value.trim(),
+                location: document.getElementById('location').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                items: cart,
+                total: cart.reduce((sum, i) => sum + i.price * i.qty, 0)
+            };
+
+            if (!order.firstName || !order.lastName || !order.location || !order.email || !order.phone) {
+                return alert("Please fill all fields.");
+            }
+
+            // Show loading state
+            const placeOrderBtn = document.getElementById('place-order');
+            const originalText = placeOrderBtn.textContent;
+            placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            placeOrderBtn.disabled = true;
+
+            try {
+                const res = await fetch("http://localhost:5000/api/orders", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(order)
+                });
+
+                if (!res.ok) throw new Error("Order failed");
+
+                const data = await res.json();
+
+                // Show success modal with order ID
+                document.getElementById('displayOrderId').textContent = data.orderId;
+                document.getElementById('orderSuccessModal').style.display = 'block';
+
+                // Store order ID in localStorage for easy access
+                localStorage.setItem('lastOrderId', data.orderId);
+
+                // Clear cart
+                cart = [];
+                localStorage.removeItem('cart');
+
+                // Reset form
+                document.getElementById('checkout-form').reset();
+                renderCart();
+
+                // Reset button
+                placeOrderBtn.textContent = originalText;
+                placeOrderBtn.disabled = false;
+
+            } catch (err) {
+                console.error(err);
+                alert("Failed to place order. Please try again.");
+                placeOrderBtn.textContent = originalText;
+                placeOrderBtn.disabled = false;
+            }
+        });
+
+        // Copy Order ID functionality
+        document.getElementById('copyOrderId').addEventListener('click', function () {
+            const orderId = document.getElementById('displayOrderId').textContent;
+            navigator.clipboard.writeText(orderId).then(() => {
+                const btn = this;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.classList.add('copied');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function (e) {
+            const modal = document.getElementById('orderSuccessModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        renderCart();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+[
+  {
+    "id": 1,
+    "name": "Dog Food Premium",
+    "price": 15.99,
+    "img": "https://cdn.mafrservices.com/pim-content/QAT/media/product/1051750/1737622803/1051750_main.jpg?im=Resize=400",
+
+    "rating": 4.5,
+    "category": "dog",
+    "quantity": 7
+  },
+  {
+    "id": 2,
+    "name": "Cat Treats",
+    "price": 7.99,
+    "img": "https://www.aonepets.pk/cdn/shop/files/Wimow_Cat_Creamy_Treat2.webp?v=1747685651",
+
+    "rating": 4.2,
+    "category": "cat",
+    "quantity": 80
+  },
+  {
+    "id": 3,
+    "name": "Bird Seed Mix",
+    "price": 5.49,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUToPlYhKHDoZyHwaNyIT0LOwNyP2HH6HYUA&s",
+    "rating": 4.0,
+    "category": "bird",
+    "quantity": 60
+  },
+  {
+    "id": 4,
+    "name": "Fish Flakes",
+    "price": 3.99,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBTGQvPIUXfO0nFCCUBP2Jx5a_6RjOisNPYQ&s",
+    "rating": 3.8,
+    "category": "fish",
+    "quantity": 120
+  },
+  {
+    "id": 5,
+    "name": "Dog Toy Rope",
+    "price": 9.99,
+    "img": "https://images-eu.ssl-images-amazon.com/images/I/71hf49QqxQL._AC_UL200_SR200,200_.jpg",
+    "rating": 4.6,
+    "category": "dog",
+    "quantity": 50
+  },
+  {
+    "id": 6,
+    "name": "Cat Litter",
+    "price": 12.99,
+    "img": "https://www.petshub.pk/wp-content/uploads/2024/05/ultra-klumpy-cat-litter.jpg",
+    "rating": 4.1,
+    "category": "cat",
+    "quantity": 70
+  },
+  {
+    "id": 7,
+    "name": "Bird Cage Small",
+    "price": 45.0,
+    "img": "https://image.made-in-china.com/2f0j00lUabZYrPOqkc/Customized-Eco-Friendly-Small-Travel-Carrier-Bird-Cage-and-Aviary-Pet-Parrot-Cage-Bird-Cage-for-Bird.webp",
+    "rating": 4.3,
+    "category": "bird",
+    "quantity": 30
+  },
+  {
+    "id": 8,
+    "name": "Aquarium Heater",
+    "price": 19.99,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRCugfhiMZGDhgw-uggseGeSaZ1F-Z-QwDkg&s",
+    "rating": 4.0,
+    "category": "fish",
+    "quantity": 40
+  },
+  {
+    "id": 9,
+    "name": "Dog Collar",
+    "price": 6.99,
+    "img": "https://cloud7.de/cdn/shop/files/cloud7-dog-collar-tiergarten-peach-m-on-grey.jpg?v=1754904534",
+    "rating": 4.2,
+    "category": "dog",
+    "quantity": 90
+  },
+  {
+    "id": 10,
+    "name": "Cat Scratching Post",
+    "price": 25.5,
+    "img": "https://shop.hauspanther.com/cdn/shop/products/RoundPost2_2048x2048.jpg?v=1606144747",
+    "rating": 4.5,
+    "category": "cat",
+    "quantity": 35
+  },
+  {
+    "id": 11,
+    "name": "Bird Swing Toy",
+    "price": 8.99,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvS-59pmITgLraZh-SRwxcQxZpzBYJO73-w&s",
+    "rating": 4.0,
+    "category": "bird",
+    "quantity": 55
+  },
+  {
+    "id": 12,
+    "name": "Fish Tank Filter",
+    "price": 22.49,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnYRMOcS7xx3i7TGUcntdEZZt0SQrFjtwGbw&s",
+    "rating": 4.3,
+    "category": "fish",
+    "quantity": 25
+  },
+  {
+    "id": 13,
+    "name": "Dog Bed",
+    "price": 35.0,
+    "img": "https://www.allpetsolutions.co.uk/cdn/shop/files/DOG-04064-M-PINKLifestyleNoDog_1024x1024.png?v=1724855674",
+    "rating": 4.7,
+    "category": "dog",
+    "quantity": 40
+  },
+  {
+    "id": 14,
+    "name": "Catnip Toys",
+    "price": 4.99,
+    "img": "https://i0.wp.com/petsnpet.pk/wp-content/uploads/2024/03/31216.webp?fit=800%2C800&ssl=1",
+    "rating": 4.3,
+    "category": "cat",
+    "quantity": 60
+  },
+  {
+    "id": 15,
+    "name": "Bird Food Pellets",
+    "price": 6.49,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWmiErnQbOthhNePoubvNVlT_W3jmyP-JLvw&s",
+    "rating": 4.1,
+    "category": "bird",
+    "quantity": 70
+  },
+  {
+    "id": 16,
+    "name": "Aquarium Air Pump",
+    "price": 14.99,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYh3zEbDHv-Q5d2SN-itMdqD8k4o_ECjJCLQ&s",
+    "rating": 4.2,
+    "category": "fish",
+    "quantity": 35
+  },
+  {
+    "id": 17,
+    "name": "Dog Shampoo",
+    "price": 10.99,
+    "img": "https://petsone.pk/wp-content/uploads/2024/01/Fluff-n-Buff-Deep-Cleansing-Dog-Shampoo.jpg",
+    "rating": 4.4,
+    "category": "dog",
+    "quantity": 80
+  },
+  {
+    "id": 18,
+    "name": "Cat Food Wet",
+    "price": 8.5,
+    "img": "https://petsone.pk/wp-content/uploads/2024/05/Jungle-Wet-Cat-Food-Tuna-And-Fish-%E2%80%93-415-Gram.jpg",
+    "rating": 4.2,
+    "category": "cat",
+    "quantity": 100
+  },
+  {
+    "id": 37,
+    "name": "Imac Tibetan Bridge – Hamster",
+    "price": 42.0,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaTzUCsX-mX0YyfKKEjukwQV0lj3UcufsJcA&s",
+    "rating": 4.2,
+    "category": "smallpets",
+    "quantity": 20
+  },
+  {
+    "id": 38,
+    "name": "Imac Bibber Water Bottle 300 ml",
+    "price": 26.0,
+    "img": "https://static-shop.vivapets.com/media/catalog/product/cache/e12a3504b2f0ed30df071ad930a3248d/t/x/tx6041.jpg",
+    "rating": 4.3,
+    "category": "smallpets",
+    "quantity": 25
+  },
+  {
+    "id": 39,
+    "name": "Flamingo Swing for Hamsters",
+    "price": 47.5,
+    "img": "https://flamingo.xcdn.nl/108640_E_01.jpg?s=24&f=s:730:470:1:1",
+    "rating": 4.1,
+    "category": "smallpets",
+    "quantity": 18
+  },
+  {
+    "id": 40,
+    "name": "Tiny Friends Farm Chinchilla Food 1kg",
+    "price": 22.99,
+    "img": "https://supremepetfoods.com/wp-content/uploads/2020/02/tff-charlie-chinchilla-hover-thumbnail.png.webp",
+    "rating": 4.4,
+    "category": "smallpets",
+    "quantity": 30
+  },
+  {
+    "id": 41,
+    "name": "Versele‑Laga Hamster Nature Cubes 700g",
+    "price": 10.49,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD4gi7UHJlYWqEFkIOQs6XBi8KtxLPD-zZWg&s",
+    "rating": 4.3,
+    "category": "smallpets",
+    "quantity": 45
+  },
+  {
+    "id": 42,
+    "name": "Zolux Mini Wooden House for Rodents",
+    "price": 14.99,
+    "img": "https://cdn.salla.sa/zNWYR/gGtfMNe4nabKRMKagpLqm5K7TcnujrEgBYAe9CVB.png",
+    "rating": 4.2,
+    "category": "smallpets",
+    "quantity": 22
+  },
+  {
+    "id": 43,
+    "name": "Flamingo Rustic Chew Stick for Small Animals",
+    "price": 3.99,
+    "img": "https://comotumascotas.com/wp-content/uploads/2025/03/v_210180-1-1.jpg",
+    "rating": 4.0,
+    "category": "smallpets",
+    "quantity": 55
+  },
+
+  {
+    "id": 45,
+    "name": "Tiny Friends Farm Timothy Hay for Dwarf Rabbits",
+    "price": 17.75,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqfpnjZqvRJ5RqfKSuf-hmt1Aa9dYVBCzvnA&s",
+    "rating": 4.5,
+    "category": "smallpets",
+    "quantity": 50
+  },
+  {
+    "id": 46,
+    "name": "Carefresh Small Animal Litter 3L",
+    "price": 11.99,
+    "img": "https://m.media-amazon.com/images/I/71DeIpLTCpL.jpg",
+    "rating": 4.3,
+    "category": "smallpets",
+    "quantity": 40
+  }
+]
